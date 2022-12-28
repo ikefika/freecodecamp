@@ -1,0 +1,28 @@
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background: #f5f6f7;
+  color: #1b1b32;
+  font-family: Helvetica;
+  margin: 0;
+}
+
+#main {
+  width: 100%;
+
+}
+
+#image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  justify-content: center;
+}
+
+img {
+  display: block;
+}
