@@ -113,3 +113,94 @@ sentence.match(shortHand1);
 let movieName = "2001: A Space Odyssey";
 let numRegex = /\d/g; // Change this line
 let result10 = movieName.match(numRegex).length;
+
+// Shorthand \s : Match Whitespaces
+// \S: Non whitespaces
+// \r return
+// \t tab
+// \f form feed
+// \n\v new line characters
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let spaceRegex = /\s/g;
+whiteSpace.match(spaceRegex);
+
+// Quantity specifiers {} : Specify Upper and Lower Number of Matches
+// For example, to match only the letter a appearing between 3 and 5 times in the string ah, your regex would be /a{3,5}h/.
+let A4 = "aaaah";
+let A2 = "aah";
+let multipleA = /a{3,5}h/;
+multipleA.test(A4);
+multipleA.test(A2);
+// The first test call would return true, while the second would return false.
+
+//Change the regex ohRegex to match the entire phrase Oh no only when it has 3 to 6 letter h's.
+let ohStr = "Ohhh no";
+let ohRegex = /Oh{3,6}\sno/; // Change this line
+let result11 = ohRegex.test(ohStr);
+
+// Specify only the lower number of Matches
+let A41 = "haaaah";
+let A21 = "haah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleA1 = /ha{3,}h/;
+multipleA1.test(A41);
+multipleA1.test(A21);
+multipleA1.test(A100);
+
+// Specify the exact number of matches
+let A42 = "haaaah";
+let A32 = "haaah";
+let A1002 = "h" + "a".repeat(100) + "h";
+let multipleHA = /ha{3}h/;
+multipleHA.test(A42);
+multipleHA.test(A32);
+multipleHA.test(A1002);
+
+// Positive & Negative Lookaheads
+let quit = "qu";
+let noquit = "qt";
+let quRegex= /q(?=u)/;
+let qRegex = /q(?!u)/;
+quit.match(quRegex);
+noquit.match(qRegex);
+// Both of these match calls would return ["q"].
+
+// a (naively) simple password checker that looks for between 3 and 6 characters and at least one number
+let password = "abc123";
+let checkPass = /(?=\w{3,6})(?=\D*\d)/;
+checkPass.test(password);
+
+// Use lookaheads in the pwRegex to match passwords that are greater than 5 characters long, and have two consecutive digits.
+let sampleWord = "astronaut";
+let pwRegex = /(?=\w{6,})(?=\w*\d{2})/; // Change this line
+let result12 = pwRegex.test(sampleWord);
+
+
+/*
+let myString = "Eleanor Roosevelt";
+let myRegex = /(Franklin|Eleanor)\s?\w?\W?\sRoosevelt/i; // Change this line
+let result = myRegex.test(myString); // Change this line
+// After passing the challenge experiment with myString and see how the grouping works
+*/
+
+// Using Capture Groups to ReUse Patterns
+// The example below matches a word that occurs thrice separated by spaces:
+let repeatRegex = /(\w+) \1 \1/;
+repeatRegex.test(repeatStr); // Returns true
+repeatStr.match(repeatRegex); // Returns ["row row row", "row"]
+
+// Use capture groups in reRegex to match a string that consists of only the same number repeated exactly three times separated by single spaces.
+let repeatNum = "42 42 42";
+let reRegex = /^(\d+) \1 \1$/; // Change this line
+let result13 = reRegex.test(repeatNum);
+
+// Use Capture Groups to Search and Replace
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+wrongText.replace(silverRegex, "blue");
+// The replace call would return the string The sky is blue.
+
+// You can also access capture groups in the replacement string with dollar signs ($).
+
+"Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1');
+
