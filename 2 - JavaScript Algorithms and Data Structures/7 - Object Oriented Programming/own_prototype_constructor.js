@@ -81,7 +81,7 @@ let duck = new Bird("Donald");
 Bird.prototype.isPrototypeOf(duck);
 
 
-/* Use prototype inheritance so you don't repeat yourself DRY */
+/* Use prototype property inheritance so you don't repeat yourself DRY */
 
 function Cat(name) {
   this.name = name;
