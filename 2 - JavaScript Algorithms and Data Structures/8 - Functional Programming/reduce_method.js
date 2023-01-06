@@ -1,11 +1,26 @@
-// Array.prototype.map(), or more simply map.
-/* The map method iterates over each item in an array and returns a new array 
-    containing the results of calling the callback function on each element.
-    It does this without mutating the original array.
-*/
+/* Use the reduce Method to Analyze Data
+    Array.prototype.reduce(), or simply reduce(), is the most general of all array operations in JavaScript.
+    You can solve almost any array processing problem using the reduce method.
+    
+    The reduce method iterates over each item in an array and returns a single value (i.e. string, number, object, array).
+    This is achieved via a callback function that is called on each iteration.
 
-/* See below for an example using the map method on the users array to return a new array 
-    containing only the names of the users as elements. For simplicity, the example only uses the first argument of the callback.
+    General form: <Object>.reduce(<call back function>, <accumulator_init_value>)
+     <call back function> 
+        (arg1, arg2, arg3, arg4) => (<operation>)
+
+    The callback function accepts four arguments.
+     arg1 is the accumulator, which gets assigned the return value of the callback function from the previous iteration.
+     arg2 is the current element being processed
+     arg3 is the index of that element, and
+     arg4 is the array upon which reduce is called.
+
+    In addition to the callback function, reduce has an additional parameter which takes an initial value for the accumulator.
+    If this second parameter is not used, then the first iteration is skipped and 
+    the second iteration gets passed the first element of the array as the accumulator.
+
+    See below for an example using reduce on the users array to return the sum of all the users' ages.
+     For simplicity, the call back function in the example only uses the first and second arguments.
 */
 const users = [
     { name: 'John', age: 34 },
@@ -13,19 +28,42 @@ const users = [
     { name: 'camperCat', age: 10 }
   ];
   
-  const names = users.map(user => user.name);
-  console.log(names);
+  const sumOfAges = users.reduce((sum, user) => sum + user.age, 0);
+  console.log(sumOfAges);
+  // The console would display the value 64.
 
-  // The console would display the value [ 'John', 'Amy', 'camperCat' ].
 
 
-/* CHALLENGE: The watchList array holds objects with information on several movies. 
-    Use map on watchList to assign a new array of objects to the ratings variable.
+/* EXAMPLE 2: In another example, 
+see how an object can be returned containing the names of the users as properties with their ages as values.
 
-    Each movie in the new array should have only a title key with the name of the film, and a rating key with the IMDB rating.
-    
-    The code in the editor currently uses a for loop to do this, so you should replace the loop functionality with your map expression.
+
 */
+const users1 = [
+    { name: 'John', age: 34 },
+    { name: 'Amy', age: 20 },
+    { name: 'camperCat', age: 10 }
+  ];
+  
+  const usersObj = users1.reduce((obj, user) => {
+    obj[user.name] = user.age;  // Operation 1, write      object key: object value
+    return obj;                 // Operation 2, return object
+  }, {});   // accumulator initial value is declared as an empty object.
+  console.log(usersObj);
+// The console would display the value { John: 34, Amy: 20, camperCat: 10 }.
+
+
+
+
+
+/* CHALLENGE: Use reduce to find the average IMDB rating of the movies directed by Christopher Nolan.
+  The variable watchList holds an array of objects with information on several movies. 
+  Recall from prior challenges how to filter data and map over it to pull what you need.
+  You may need to create other variables, and return the average rating from getRating function.
+  Note that the rating values are saved as strings in the object and need to be converted 
+  into numbers before they are used in any mathematical operations.
+*/
+
 // The global variable
 const watchList = [
     {
@@ -140,37 +178,16 @@ const watchList = [
     }
   ];
   
-  // Solution 1: Using ES6 notation, each item in array is processed to extract title and rating.
-  const ratings = watchList.map(item => ({
-    title: item["Title"],
-    rating: item["imdbRating"]
-  }));
-  
-/*   // Solution 2: Using parameter destructuring, the title and rating are extracted and returned in an object.
-  const ratings = watchList.map(({ Title: title, imdbRating: rating }) => ({title, rating})); 
-  */
-
-  /* See equivalent for loop below
-  for (let i = 0; i < watchList.length; i++) {
-    ratings.push({title: watchList[i]["Title"], rating: watchList[i]["imdbRating"]});
+  function getRating(watchList) {
+    // Only change code below this line
+    let averageRating = watchList
+      .filter(item => item.Director === "Christopher Nolan")
+      .map(item => ({
+        rating: item["imdbRating"]
+      }))
+      .reduce((average, movie, index) => ((average*index) + parseFloat(movie.rating))/(index+1), 0);
+    // Only change code above this line
+    return averageRating;
   }
-  */
   
-  
-  // Only change code above this line
-  
-  console.log(JSON.stringify(ratings));
-
-
-  /* Write your own Array.prototype.myMap(), which should behave exactly like Array.prototype.map().
-    You should not use the built-in map method. The Array instance can be accessed in the myMap method using this.
-  */
-    Array.prototype.myMap = function(callback) {
-        const newArray = [];
-        // Only change code below this line
-        for (let i = 0; i < this.length; i++) {
-          newArray.push(callback(this[i], i, this));
-        }
-        // Only change code above this line
-        return newArray;
-      };
+  console.log(getRating(watchList));

@@ -1,11 +1,18 @@
-// Array.prototype.map(), or more simply map.
-/* The map method iterates over each item in an array and returns a new array 
-    containing the results of calling the callback function on each element.
-    It does this without mutating the original array.
-*/
+/* filter()
+    filter calls a function on each element of an array and returns a new array containing only 
+    the elements for which that function returns a truthy value.
+    that is, a value which returns true if passed to the Boolean() constructor.
+    In other words, it filters the array, based on the function passed to it.
+    it does this without needing to modify the original array.
 
-/* See below for an example using the map method on the users array to return a new array 
-    containing only the names of the users as elements. For simplicity, the example only uses the first argument of the callback.
+    The callback function accepts three arguments.
+        The first argument is the current element being processed.
+        The second is the index of that element and 
+        the third is the array upon which the filter method was called.
+    
+    See below for an example using the filter method on the users array
+    to return a new array containing only the users under the age of 30.
+    For simplicity, the example only uses the first argument of the callback.
 */
 const users = [
     { name: 'John', age: 34 },
@@ -13,18 +20,18 @@ const users = [
     { name: 'camperCat', age: 10 }
   ];
   
-  const names = users.map(user => user.name);
-  console.log(names);
+  const usersUnder30 = users.filter(user => user.age < 30);
+  console.log(usersUnder30);
 
-  // The console would display the value [ 'John', 'Amy', 'camperCat' ].
+//The console would display the value [ { name: 'Amy', age: 20 }, { name: 'camperCat', age: 10 } ].
 
 
-/* CHALLENGE: The watchList array holds objects with information on several movies. 
-    Use map on watchList to assign a new array of objects to the ratings variable.
 
-    Each movie in the new array should have only a title key with the name of the film, and a rating key with the IMDB rating.
-    
-    The code in the editor currently uses a for loop to do this, so you should replace the loop functionality with your map expression.
+/* Challenge: The variable watchList holds an array of objects with information on several movies.
+  Use a combination of filter and map on watchList to assign a new array of objects with only title and rating keys.
+  The new array should only include objects where imdbRating is greater than or equal to 8.0.
+  Note that the rating values are saved as strings in the object and you may need 
+  to convert them into numbers to perform mathematical operations on them.
 */
 // The global variable
 const watchList = [
@@ -140,37 +147,35 @@ const watchList = [
     }
   ];
   
-  // Solution 1: Using ES6 notation, each item in array is processed to extract title and rating.
-  const ratings = watchList.map(item => ({
-    title: item["Title"],
-    rating: item["imdbRating"]
-  }));
-  
-/*   // Solution 2: Using parameter destructuring, the title and rating are extracted and returned in an object.
-  const ratings = watchList.map(({ Title: title, imdbRating: rating }) => ({title, rating})); 
-  */
-
-  /* See equivalent for loop below
-  for (let i = 0; i < watchList.length; i++) {
-    ratings.push({title: watchList[i]["Title"], rating: watchList[i]["imdbRating"]});
-  }
-  */
-  
+  // Only change code below this line
+  const filteredList = watchList
+    .filter(item => parseFloat(item.imdbRating) >= 8) //parseFloat converts string to float to allow comparison
+    .map(item => ({
+      title: item["Title"],
+      rating: item["imdbRating"]
+    }))
+    ;
   
   // Only change code above this line
   
-  console.log(JSON.stringify(ratings));
+  console.log(filteredList);
 
 
-  /* Write your own Array.prototype.myMap(), which should behave exactly like Array.prototype.map().
-    You should not use the built-in map method. The Array instance can be accessed in the myMap method using this.
+
+
+
+
+  /* Filter method on a Prototype 
+  
   */
-    Array.prototype.myMap = function(callback) {
-        const newArray = [];
-        // Only change code below this line
-        for (let i = 0; i < this.length; i++) {
-          newArray.push(callback(this[i], i, this));
-        }
-        // Only change code above this line
-        return newArray;
-      };
+  Array.prototype.myFilter = function(callback) {
+    const newArray = [];
+    // Only change code below this line
+    for (let i = 0; i < this.length; i++) {
+      if (Boolean(callback(this[i], i, this)) === true) {
+        newArray.push(this[i]);
+      }
+    }
+    // Only change code above this line
+    return newArray;
+  };
