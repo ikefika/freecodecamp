@@ -185,7 +185,7 @@ const watchList = [
       .map(item => ({
         rating: item["imdbRating"]
       }))
-      .reduce((average, movie, index) => ((average*index) + parseFloat(movie.rating))/(index+1), 0);
+      .reduce((average, movie, index) => ((average*index) + parseFloat(movie.rating))/(index+1), 0); // Moving Average
     // Only change code above this line
     return averageRating;
   }
