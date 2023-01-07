@@ -35,4 +35,5 @@ console.log(
     existing variable and not a copy. So changing a value in newArr would change the value in arrVar.
 2. Declare function parameters - any computation inside a function depends only on the arguments passed to the function, 
     and not on any global object or variable.
+    
 */
