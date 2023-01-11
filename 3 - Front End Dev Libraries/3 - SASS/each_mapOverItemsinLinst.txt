@@ -1,0 +1,16 @@
+<style type='text/scss'>
+  $bgcolors: (color1: blue, color2: black, color3: red);
+
+  @each $item, $bgcolor in $bgcolors {
+    .#{$bgcolor}-bg {background-color: $bgcolor;}
+  }
+
+  div {
+    height: 200px;
+    width: 200px;
+  }
+</style>
+
+<div class="blue-bg"></div>
+<div class="black-bg"></div>
+<div class="red-bg"></div>
