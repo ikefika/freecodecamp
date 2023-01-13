@@ -15,3 +15,21 @@ const JSX1 = (
   );
   // Change code below this line
   ReactDOM.render(JSX1, document.getElementById("challenge-node"));
+
+  // Define / Add a Html class in JSX, using className instead for class
+  const JSX2 = (
+    <div className="myDiv">
+      <h1>Add a class to this div</h1>
+    </div>
+  );
+
+  // Complete this function so it returns a single div element which contains some string of text.
+  const MyComponent = function() {
+    // Change code below this line
+    return (
+      <div>Some string of text</div>
+    );
+  
+  
+    // Change code above this line
+  };
