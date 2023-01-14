@@ -71,3 +71,40 @@ class ToDo extends React.Component {
   }
 };
 
+
+/* DEFAULT PROPS 
+  The code editor shows a ShoppingCart component. Define default props on this component which specify a prop items with a value of 0.
+*/
+const ShoppingCart = (props) => {
+  return (
+    <div>
+      <h1>Shopping Cart Component: Total Items = {props.items}</h1>
+    </div>
+  )
+};
+// Change code below this line
+ShoppingCart.defaultProps = { items: 0};
+
+
+
+
+
+/* Override the Default Props */
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+}
+
+Items.defaultProps = {
+  quantity: 0
+}
+
+class ShoppingCart1 extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    { /* Change code below this line */ }
+    return <Items quantity={10}/>
+    { /* Change code above this line */ }
+  }
+};
