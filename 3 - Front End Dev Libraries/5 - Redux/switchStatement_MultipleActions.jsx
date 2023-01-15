@@ -14,6 +14,9 @@ The switch statement should switch over action.type and return the appropriate a
 
 
 */
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
+
 const defaultState = {
     authenticated: false
   };
@@ -21,10 +24,10 @@ const defaultState = {
   const authReducer = (state = defaultState, action) => {
     // Change code below this line
     switch (action.type) {
-      case 'LOGIN':
+      case LOGIN:
         return state = {authenticated: true}; // You can also return {authenticated: true}, but this is not good for immutability
         break;
-      case 'LOGOUT':
+      case LOGOUT:
         return state = {authenticated: false} // You can also return {authenticated: false}, but this is not good for immutability
         break;
       default:
@@ -37,12 +40,12 @@ const defaultState = {
   
   const loginUser = () => {
     return {
-      type: 'LOGIN'
+      type: LOGIN
     }
   };
   
   const logoutUser = () => {
     return {
-      type: 'LOGOUT'
+      type: LOGOUT
     }
   };
