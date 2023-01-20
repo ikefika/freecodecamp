@@ -1,0 +1,49 @@
+<!-- RANDOM QUOTE GENERATOR
+    TECH STACK:
+    - HTML
+    - CSS -> styles.css
+    - JavaScript -> scripts.js
+ -->
+<!DOCTYPE html>
+
+<html lang="en">
+     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Random Quote Generator - HTML + CSS + JAVASCRIPT</title>
+        <meta name="description" content="">
+        <!-- Set Viewport Responsive to Device Width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS Styles -->
+        <link rel="stylesheet" href="./ranQuoGen_v1_styles.css" />
+        <!-- JavaScript File -->
+        <script src="./ranQuoGen_v1_scripts.js"></script>
+        <!-- Font Awesome Stylesheets -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+ 
+     </head>
+     
+     <body>
+        <div id="quote-box" class="flex-container">
+            <div id="text" class="quote-text">
+                <h1>
+                    <i class="fa fa-quote-left"></i>
+                    <span id="quotes">In order to succeed, your desire for success should be greater than your fear of failure.</span>
+                    <i class="fa fa-quote-right"></i>
+                </h1>
+            </div>
+            <div id="author" class="quote-author">
+                <h3>
+                    <span id="authors"> - Author</span>
+                </h3>
+            </div>
+            <div id="buttons" class="quote-buttons">
+                <a class="btn" id="tweet-quote" title="Tweet this quote!" target="_top" href="twitter.com/intent/tweet">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <button type="button" class="btn" id="new-quote" onclick="testFunc()">New quote</button>
+            </div>
+         </div>
+     </body
+ 
+</html>
